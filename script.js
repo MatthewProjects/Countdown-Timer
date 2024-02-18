@@ -22,8 +22,13 @@ function updateCountdown() {
   document.getElementById("hours").innerText = hours;
   document.getElementById("minutes").innerText = minutes;
   document.getElementById("seconds").innerText = seconds;
+
+  // Request next animation frame
+  requestAnimationFrame(updateCountdown);
 }
 
+// Initial call to start the countdown
+updateCountdown();
 
 const interval = setInterval(updateCountdown, 1000);
 
