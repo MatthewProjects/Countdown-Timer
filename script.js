@@ -8,12 +8,26 @@ const difference = targetDate - currentDate;
 console.log(difference); // This will log the difference in milliseconds
 
 
+
+
+
+
+
+
+// Cache DOM elements for countdown timer
+const daysElement = document.getElementById("days");
+const hoursElement = document.getElementById("hours");
+const minutesElement = document.getElementById("minutes");
+const secondsElement = document.getElementById("seconds");
+
+// Function to update countdown timer
 function updateCountdown(currentTime) {
   const difference = targetDate - currentTime;
 
   if (difference <= 0) {
     clearInterval(interval);
     document.getElementById("timer").innerText = "The event has started!";
+    document.body.style.backgroundColor = "#f44336"; // Change background color
     return;
   }
 
@@ -23,21 +37,23 @@ function updateCountdown(currentTime) {
   const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
   // Update HTML elements with countdown values
-  document.getElementById("days").innerText = days;
-  document.getElementById("hours").innerText = hours;
-  document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerText = seconds;
+  daysElement.innerText = days;
+  hoursElement.innerText = hours;
+  minutesElement.innerText = minutes;
+  secondsElement.innerText = seconds;
 }
 
-// Initial call to start the countdown
-updateCountdown(new Date());
+// Initial setup for countdown timer
+function setupCountdown() {
+  const currentTime = new Date();
+  updateCountdown(currentTime);
 
-const interval = setInterval(() => {
-  updateCountdown(new Date());
-}, 1000);
-
-// Check for difference < 0 and stop the countdown if needed
-if (difference < 0) {
-  clearInterval(interval);
-  document.getElementById("timer").innerText = "The event has started!";
+  // Set interval to call updateCountdown every 1 second
+  const interval = setInterval(() => {
+    const currentTime = new Date();
+    updateCountdown(currentTime);
+  }, 1000);
 }
+
+// Start countdown timer
+setupCountdown();
