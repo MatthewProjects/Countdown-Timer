@@ -24,7 +24,7 @@ body {
 
 .timer-unit {
   font-size: 1.2rem;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 2px;
   margin-top: 10px;
   display: inline;
