@@ -7,13 +7,6 @@ console.log(targetDate); // Check the target date in the console
 const difference = targetDate - currentDate;
 console.log(difference); // This will log the difference in milliseconds
 
-
-
-
-
-
-
-
 // Cache DOM elements for countdown timer
 const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
