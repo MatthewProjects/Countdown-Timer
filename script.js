@@ -8,9 +8,14 @@ const difference = targetDate - currentDate;
 console.log(difference); // This will log the difference in milliseconds
 
 
-function updateCountdown() {
-  const currentTime = new Date();
+function updateCountdown(currentTime) {
   const difference = targetDate - currentTime;
+
+  if (difference <= 0) {
+    clearInterval(interval);
+    document.getElementById("timer").innerText = "The event has started!";
+    return;
+  }
 
   const days = Math.floor(difference / (1000 * 60 * 60 * 24));
   const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -22,16 +27,16 @@ function updateCountdown() {
   document.getElementById("hours").innerText = hours;
   document.getElementById("minutes").innerText = minutes;
   document.getElementById("seconds").innerText = seconds;
-
-  // Request next animation frame
-  requestAnimationFrame(updateCountdown);
 }
 
 // Initial call to start the countdown
-updateCountdown();
+updateCountdown(new Date());
 
-const interval = setInterval(updateCountdown, 1000);
+const interval = setInterval(() => {
+  updateCountdown(new Date());
+}, 1000);
 
+// Check for difference < 0 and stop the countdown if needed
 if (difference < 0) {
   clearInterval(interval);
   document.getElementById("timer").innerText = "The event has started!";
